@@ -38,7 +38,10 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          scripts: cp code/nginx.conf deploy/nginx.conf
+          scripts: |
+            export DOLLAR='$'
+            envsubst < nginx.conf.template > deploy/nginx.conf
+            nginx -g "daemon off;"
       - name: run
         uses: appleboy/ssh-action@master
         with:
