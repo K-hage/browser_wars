@@ -23,7 +23,7 @@ jobs:
           mkdir deploy          
           export IMAGE_TAG=${{ secrets.IMAGE_TAG }}
           cat docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
-          cat nginx.conf | envsubst > deploy/nginx.conf
+          copy nginx.conf deploy/nginx.conf
       - name: copy files
         uses: appleboy/scp-action@master
         with:
