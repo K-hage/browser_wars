@@ -39,6 +39,8 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
+          scripts: |
+            envsubst < code/nginx.conf > deploy/nginx.conf
           source: "deploy/nginx.conf"
           target: "deploy"
           strip_components: 1
@@ -48,6 +50,6 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          script: |
+          script: |            
             cd deploy            
             docker-compose up -d
