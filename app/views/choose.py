@@ -3,7 +3,7 @@ from werkzeug import Response
 
 from app.classes.equipment import Equipment
 from app.classes.heroes import unit_classes, PlayerUnit, EnemyUnit
-from app.views.fight import heroes
+from app.container import heroes
 
 app = Blueprint('choose_bp', __name__, template_folder='templates')
 

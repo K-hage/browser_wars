@@ -3,13 +3,14 @@ from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from app.classes.heroes.base_unit import BaseUnit
+    from app.classes.heroes import BaseUnit
 
 
 class Skill(ABC):
     """
     Базовый класс умения
     """
+
     user = None
     target = None
 

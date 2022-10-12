@@ -30,8 +30,8 @@ class Arena(metaclass=BaseSingleton):
     def _check_players_hp(self) -> Optional[str]:
         """ Проверка здоровья """
 
-        if self.player.hp > 0 and self.enemy.hp > 0:
-            return None
+        if self.player.health_points > 0 and self.enemy.health_points > 0:
+            return
 
         if self.player.hp <= 0 and self.enemy.hp <= 0:
             self.battle_result = 'Ничья'
@@ -57,14 +57,11 @@ class Arena(metaclass=BaseSingleton):
     def next_turn(self) -> str:
         """ Следующий ход """
 
-        result = self._check_players_hp()
-
-        if result is not None:
-            return ''
-
         if self.game_is_running:
             self._stamina_regeneration()
-            return self.enemy.hit(self.player)
+            result = self.enemy.hit(self.player)
+            self._check_players_hp()
+            return result
 
     def _end_game(self) -> str:
         """ Кнопка завершения игры """

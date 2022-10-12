@@ -1,14 +1,7 @@
 from flask import Blueprint, render_template
-from app.classes.arena import Arena
-from app.classes.heroes import BaseUnit
+from app.container import arena, heroes
 
 app = Blueprint('fight_bp', __name__, template_folder='templates')
-
-arena = Arena()
-heroes = {
-    "player": BaseUnit,
-    "enemy": BaseUnit
-}
 
 
 @app.route("/")
