@@ -7,10 +7,6 @@ from app.views.fight import heroes
 
 app = Blueprint('choose_bp', __name__, template_folder='templates')
 
-equipment = Equipment()
-weapons = equipment.get_weapons_names()
-armors = equipment.get_armors_names()
-
 
 @app.route("/hero/", methods=['post', 'get'])
 def choose_hero() -> Response | str:
@@ -19,6 +15,10 @@ def choose_hero() -> Response | str:
     GET - меню параметров героя
     POST - создание героя
     """
+
+    equipment = Equipment()
+    weapons = equipment.get_weapons_names()
+    armors = equipment.get_armors_names()
 
     if request.method == 'GET':
         result = {
@@ -54,6 +54,10 @@ def choose_enemy() -> Response | str:
     GET - меню параметров противника
     POST - создание противника
     """
+
+    equipment = Equipment()
+    weapons = equipment.get_weapons_names()
+    armors = equipment.get_armors_names()
 
     if request.method == 'GET':
         result = {

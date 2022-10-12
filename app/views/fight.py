@@ -1,5 +1,3 @@
-from typing import Type
-
 from flask import Blueprint, render_template
 from app.classes.arena import Arena
 from app.classes.heroes import BaseUnit
