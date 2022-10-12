@@ -6,15 +6,15 @@ app = Blueprint('errors_bp', __name__, template_folder='templates')
 
 
 @app.app_errorhandler(404)  # обработчик ошибки 404
-def page_not_found(e) -> Tuple[str, int]:
+def page_not_found(e: Exception) -> Tuple[str, int]:
     return render_template('404.html', error=e), 404
 
 
 @app.app_errorhandler(405)  # обработчик ошибки 404
-def page_not_found(e) -> Tuple[str, int]:
+def page_method_not_always(e: Exception) -> Tuple[str, int]:
     return render_template('500.html', error=e), 405
 
 
 @app.app_errorhandler(500)  # обработчик ошибки 500
-def server_error(e) -> Tuple[str, int]:
+def server_error(e: Exception) -> Tuple[str, int]:
     return render_template('500.html', error=e), 500

@@ -1,12 +1,12 @@
-from typing import Optional, Dict
+from typing import Optional, Dict, Any
 
 from app.classes.heroes import BaseUnit
 
 
 class BaseSingleton(type):
-    _instances: Dict = {}
+    _instances: Dict[Any, Any] = {}
 
-    def __call__(cls, *args, **kwargs) -> Dict:
+    def __call__(cls, *args: Any, **kwargs: Any) -> Dict:
         if cls not in cls._instances:
             instance = super().__call__(*args, **kwargs)
             cls._instances[cls] = instance
@@ -31,7 +31,7 @@ class Arena(metaclass=BaseSingleton):
         """ Проверка здоровья """
 
         if self.player.health_points > 0 and self.enemy.health_points > 0:
-            return
+            return None
 
         if self.player.hp <= 0 and self.enemy.hp <= 0:
             self.battle_result = 'Ничья'
@@ -54,7 +54,7 @@ class Arena(metaclass=BaseSingleton):
             else:
                 unit.stamina += self.STAMINA_PER_ROUND
 
-    def next_turn(self) -> str:
+    def next_turn(self) -> Optional[str]:
         """ Следующий ход """
 
         if self.game_is_running:
@@ -66,7 +66,7 @@ class Arena(metaclass=BaseSingleton):
     def _end_game(self) -> str:
         """ Кнопка завершения игры """
 
-        self._instances = {}
+        self._instances: Dict[Any, Any] = {}
         self.game_is_running = False
         return self.battle_result
 

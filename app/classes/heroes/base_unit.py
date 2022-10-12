@@ -1,5 +1,6 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
+from typing import Type
 
 from app.classes.equipment import Weapon, Armor
 
@@ -20,8 +21,8 @@ class BaseUnit(ABC):
         self.unit_class = unit_class
         self.hp = unit_class.max_health
         self.stamina = unit_class.max_stamina
-        self.weapon = None
-        self.armor = None
+        self.weapon = Type[Weapon]
+        self.armor = Type[Armor]
         self._is_skill_used = False
 
     @property
