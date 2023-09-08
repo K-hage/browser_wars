@@ -17,13 +17,13 @@ class BaseUnit(ABC):
         При инициализации класса Unit используем свойства класса UnitClass
         """
 
-        self.name = name
-        self.unit_class = unit_class
-        self.hp = unit_class.max_health
-        self.stamina = unit_class.max_stamina
-        self.weapon = Type[Weapon]
-        self.armor = Type[Armor]
-        self._is_skill_used = False
+        self.name: str = name
+        self.unit_class: UnitClass = unit_class
+        self.hp: float = unit_class.max_health
+        self.stamina: float = unit_class.max_stamina
+        self.weapon: Weapon = Type[Weapon]
+        self.armor: Armor = Type[Armor]
+        self._is_skill_used: bool = False
 
     @property
     def health_points(self) -> float:
@@ -49,14 +49,14 @@ class BaseUnit(ABC):
         self.armor = armor
         return f"{self.name} экипирован броней {self.armor.name}"
 
-    def _count_damage(self, target: BaseUnit) -> int:
+    def _count_damage(self, target: BaseUnit) -> float:
         """ Метод расчета нанесенного и полученного урона """
 
         # отнимаем выносливость потраченную на удар
         self.stamina -= self.weapon.stamina_per_hit
 
         # считаем урон
-        damage = self.unit_class.attack + self.weapon.damage
+        damage = self.unit_class.attack * self.weapon.damage
 
         # считаем выносливость противника потраченную на защиту
         target_stamina = target.armor.stamina_per_turn * target.unit_class.stamina
@@ -70,7 +70,7 @@ class BaseUnit(ABC):
 
         return damage
 
-    def get_damage(self, damage: int) -> None:
+    def get_damage(self, damage: float) -> None:
         """ Получение урона целью """
 
         if damage > 0:
@@ -93,4 +93,3 @@ class BaseUnit(ABC):
         self._is_skill_used = True
 
         return self.unit_class.skill.use(self, target)
-

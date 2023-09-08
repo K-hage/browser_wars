@@ -43,7 +43,7 @@ def choose_hero() -> Response | str:
         # снаряжаем оружием
         player.equip_weapon(equipment.get_weapon(weapon))
         heroes['player'] = player
-
+        print(player)
         return redirect(url_for('choose_bp.choose_enemy'))
 
 

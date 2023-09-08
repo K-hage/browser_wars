@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, Response
 from app.container import arena, heroes
 
 app = Blueprint('fight_bp', __name__, template_folder='templates')
@@ -49,7 +49,7 @@ def pass_turn() -> str:
 
 
 @app.route("/end-fight/")
-def end_fight() -> str:
+def end_fight() -> Response:
     """ Кнопка завершения игры """
 
-    return render_template("index.html")
+    return redirect('main_bp.menu_page')
